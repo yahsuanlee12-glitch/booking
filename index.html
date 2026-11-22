@@ -68,6 +68,7 @@
   button.back{width:100%;margin-top:10px;background:none;border:0;color:var(--muted);font-size:14px;padding:8px;cursor:pointer;font-family:inherit;letter-spacing:.1em}
   .undecided{width:100%;margin-top:12px;border:1px dashed var(--tea);background:var(--card);border-radius:12px;padding:12px;color:var(--ink);font-size:14px;cursor:pointer;font-family:inherit;letter-spacing:.04em}
   .undecided.on{background:var(--deep);border:1px solid var(--deep);color:#fff}
+  .linelink{display:inline-block;margin-top:10px;padding:8px 18px;border:1px solid var(--tea);border-radius:999px;color:var(--deep);font-size:12.5px;text-decoration:none;letter-spacing:.06em;background:var(--card)}
   .linebtn{display:inline-block;margin-top:6px;padding:10px 22px;border-radius:999px;border:1px solid var(--deep);color:var(--deep);text-decoration:none;font-size:14px;letter-spacing:.1em}
   footer{text-align:center;margin-top:28px;color:var(--muted);font-size:12px;font-weight:300;letter-spacing:.06em}
 </style>
@@ -149,7 +150,7 @@
 
   <div id="done" class="card done" style="display:none"></div>
 
-  <footer id="addr"></footer>
+  <footer><div id="addr"></div><a id="lineLink" class="linelink" target="_blank" rel="noopener" style="display:none">有任何問題，歡迎加入官方 LINE 詢問</a></footer>
 </div>
 
 <script>
@@ -217,6 +218,7 @@ function load(){
     data = d;
     el('intro').textContent = d.intro || '';
     el('addr').textContent = d.address || '';
+    if (/^https:\/\//.test(d.lineUrl || '')) { el('lineLink').href = d.lineUrl; el('lineLink').style.display = ''; }
     loadLogo(d.logo);
     el('course').innerHTML = '<option value="">請選擇</option>' + d.courses.map(function(c){ return '<option>' + esc(c) + '</option>'; }).join('');
     el('exp').innerHTML = EXP.map(function(x){ return '<button type="button" class="chip" data-v="' + esc(x) + '">' + esc(x) + '</button>'; }).join('');
