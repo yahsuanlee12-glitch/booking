@@ -6,101 +6,138 @@
 <title>Original Pilates 初形｜體驗課預約</title>
 <meta name="description" content="Original Pilates 初形 皮拉提斯體驗課線上預約">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;500&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#f6f1eb;--card:#fffdfa;--ink:#5a4a40;--muted:#a69689;--tea:#c4ab95;--deep:#8f7564;--line:#ebe1d6;--soft:#f1e8de;--full:#f3eee8}
+  :root{
+    --bg:#f5efe8; --card:#fffcf8; --ink:#4f4038; --muted:#a3928a; --tea:#cbb39c; --deep:#8c705f;
+    --cocoa:#6f5546; --line:#ece2d7; --soft:#f6eee5; --fill:#faf5ef; --full:#f1ebe4;
+    --serif:"Noto Serif TC",serif; --en:"Cormorant Garamond",serif;
+  }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;font-weight:400;line-height:1.7;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:520px;margin:0 auto;padding:36px 20px 56px}
-  header{text-align:center;margin-bottom:26px}
-  .logo{display:none;width:128px;height:auto;margin:0 auto 14px}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;font-weight:400;line-height:1.75;letter-spacing:.02em;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+  /* 背景奶茶色光暈 */
+  body::before,body::after{content:"";position:fixed;z-index:0;border-radius:50%;filter:blur(60px);opacity:.55;pointer-events:none}
+  body::before{width:340px;height:340px;background:#ead9c7;top:-120px;right:-140px}
+  body::after{width:300px;height:300px;background:#efe3d6;bottom:-120px;left:-130px}
+  .wrap{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:28px 18px 56px}
+
+  /* 拱門主視覺 */
+  header{text-align:center;margin-bottom:22px}
+  .arch{background:linear-gradient(180deg,#efe2d4 0%,#f7f0e8 62%,rgba(255,252,248,.6) 100%);border-radius:240px 240px 28px 28px;padding:44px 26px 26px;box-shadow:0 10px 30px rgba(120,92,74,.07)}
+  .logo{display:none;width:104px;height:auto;margin:0 auto 12px}
   .logo.show{display:block}
-  .brand{letter-spacing:.32em;font-size:12px;color:var(--deep);font-weight:500;margin-bottom:6px}
-  h1{font-size:19px;font-weight:500;margin:4px 0 10px;color:var(--ink);letter-spacing:.08em}
-  .divider{width:28px;height:1px;background:var(--tea);margin:0 auto 12px}
-  .intro{color:var(--muted);font-size:13.5px;margin:0;font-weight:300}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 20px;margin-top:16px;box-shadow:0 2px 14px rgba(143,117,100,.05)}
-  .step{font-size:12.5px;color:var(--deep);font-weight:500;letter-spacing:.14em;margin-bottom:12px}
-  .step b{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;border-radius:50%;background:var(--soft);color:var(--deep);font-size:11px;font-weight:500;margin-right:8px;letter-spacing:0}
+  .brand{letter-spacing:.34em;font-size:11.5px;color:var(--deep);font-weight:500;margin-bottom:8px}
+  .eyebrow{font-family:var(--en);font-style:italic;font-size:15px;letter-spacing:.18em;color:var(--deep);margin:6px 0 2px}
+  h1{font-family:var(--serif);font-size:24px;font-weight:500;margin:4px 0 12px;color:var(--cocoa);letter-spacing:.1em;line-height:1.5}
+  h1 small{display:block;font-family:var(--en);font-size:15px;letter-spacing:.14em;color:var(--deep);font-weight:500;margin-bottom:2px}
+  .divider{width:22px;height:1px;background:var(--tea);margin:0 auto 12px}
+  .intro{color:var(--muted);font-size:13px;margin:0 auto;font-weight:300;max-width:330px;line-height:1.85}
+
+  /* 進度 */
+  .prog{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 4px;font-size:12.5px;color:var(--muted);letter-spacing:.08em}
+  .prog span{display:flex;align-items:center;gap:7px}
+  .prog i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1px solid var(--tea);font-family:var(--en);font-size:13px;color:var(--deep);background:var(--card)}
+  .prog span.on{color:var(--cocoa);font-weight:500}
+  .prog span.on i{background:var(--deep);border-color:var(--deep);color:#fff}
+  .prog .bar{width:34px;height:1px;background:var(--tea)}
+
+  /* 卡片 */
+  .card{background:var(--card);border-radius:24px;padding:26px 22px 24px;margin-top:16px;box-shadow:0 8px 28px rgba(120,92,74,.07)}
+  .step{display:flex;align-items:baseline;gap:10px;font-family:var(--serif);font-size:16px;color:var(--cocoa);font-weight:500;letter-spacing:.1em;margin-bottom:14px}
+  .step em{font-family:var(--en);font-style:italic;font-size:20px;color:var(--tea);letter-spacing:0;font-weight:500}
+  .step span{margin-left:auto;font-family:var(--en);font-style:italic;font-size:13px;color:var(--muted);letter-spacing:.14em;font-weight:400}
+  .why{background:var(--soft);border-left:2px solid var(--tea);border-radius:4px 14px 14px 4px;padding:12px 14px;font-size:12.5px;color:var(--deep);font-weight:300;line-height:1.85;margin-bottom:6px}
+
+  /* 日期時段 */
   .dwrap{display:flex;align-items:flex-start;gap:6px}
-  .arr{flex:0 0 auto;width:32px;height:38px;border:1px solid var(--line);background:var(--card);border-radius:50%;color:var(--deep);font-size:18px;line-height:1;cursor:pointer;font-family:inherit;padding:0}
+  .arr{flex:0 0 auto;width:34px;height:38px;border:0;background:var(--fill);border-radius:50%;color:var(--deep);font-size:18px;line-height:1;cursor:pointer;font-family:inherit;padding:0}
   .arr:active{background:var(--soft)}
   .dates{flex:1;min-width:0;display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--tea) var(--soft)}
-  .dates::-webkit-scrollbar{height:6px}
+  .dates::-webkit-scrollbar{height:5px}
   .dates::-webkit-scrollbar-track{background:var(--soft);border-radius:999px}
   .dates::-webkit-scrollbar-thumb{background:var(--tea);border-radius:999px}
-  .chip{flex:0 0 auto;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 16px;font-size:13.5px;cursor:pointer;color:var(--ink);font-family:inherit;letter-spacing:.04em;transition:all .15s}
-  .chip.on{background:var(--deep);border-color:var(--deep);color:#fff}
+  .chip{flex:0 0 auto;border:1px solid transparent;background:var(--fill);border-radius:999px;padding:8px 16px;font-size:13.5px;cursor:pointer;color:var(--ink);font-family:inherit;letter-spacing:.04em;transition:all .18s}
+  .chip:hover{border-color:var(--line)}
+  .chip.on{background:var(--deep);color:#fff;box-shadow:0 4px 12px rgba(140,112,95,.25)}
   .times{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
-  .slot{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:11px 6px;text-align:center;cursor:pointer;font-size:15px;color:var(--ink);font-family:inherit;letter-spacing:.04em;transition:all .15s}
-  .slot small{display:block;font-size:11px;color:var(--muted);font-weight:300}
-  .slot.on{background:var(--deep);border-color:var(--deep);color:#fff}
-  .slot.on small{color:#efe3d8}
-  .slot.full{background:var(--full);border-color:var(--full);color:#c9bdb2;cursor:not-allowed}
-  .slot.full small{color:#c9bdb2}
-  label{display:block;font-size:13.5px;margin:16px 0 6px;color:var(--ink)}
-  label .req{color:var(--deep)}
-  input,select,textarea{width:100%;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-family:inherit;outline:none;transition:border-color .15s;-webkit-appearance:none;appearance:none}
-  select{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:36px}
-  input:focus,select:focus,textarea:focus{border-color:var(--tea)}
-  textarea{min-height:76px;resize:vertical}
-  .radios{display:flex;flex-wrap:wrap;gap:8px}
-  .agree{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--muted);margin-top:18px;font-weight:300}
-  .agree input{width:16px;height:16px;margin-top:3px;flex:0 0 auto;-webkit-appearance:checkbox;appearance:checkbox;accent-color:var(--deep)}
-  button.submit{width:100%;margin-top:20px;background:var(--deep);color:#fff;border:0;border-radius:999px;padding:15px;font-size:16px;cursor:pointer;font-family:inherit;letter-spacing:.2em;font-weight:500}
-  button.submit:disabled{opacity:.5;cursor:not-allowed}
-  .err{color:#b0574b;font-size:13.5px;margin-top:10px;min-height:1em;text-align:center}
-  .muted{color:var(--muted);font-size:12.5px;font-weight:300}
-  .why{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:12.5px;color:var(--deep);font-weight:300;line-height:1.75;margin-bottom:4px}
-  .empty{color:var(--muted);font-size:14px;padding:8px 0}
-  .done{text-align:center;padding:30px 20px}
-  .done .mark{width:84px;margin:0 auto 6px;display:block}
-  .done .big{font-size:18px;color:var(--ink);margin:6px 0 16px;letter-spacing:.12em;font-weight:500}
-  .done table{margin:0 auto;text-align:left;font-size:14.5px;border-collapse:collapse}
-  .done td{padding:5px 12px}
-  .done td:first-child{color:var(--muted);font-weight:300}
-  .bid{margin:18px auto 0;padding:12px 16px;border:1px dashed var(--tea);border-radius:14px;display:inline-block;min-width:200px}
-  .bid-l{font-size:12px;color:var(--muted);letter-spacing:.14em;font-weight:300}
-  .bid-v{font-size:22px;color:var(--deep);letter-spacing:.08em;font-weight:500}
-  .prog{display:flex;align-items:center;gap:10px;justify-content:center;font-size:12.5px;color:var(--muted);letter-spacing:.08em;margin:4px 0 2px}
-  .prog span.on{color:var(--deep);font-weight:500}
-  .prog .bar{width:28px;height:1px;background:var(--tea)}
-  button.back{width:100%;margin-top:10px;background:none;border:0;color:var(--muted);font-size:14px;padding:8px;cursor:pointer;font-family:inherit;letter-spacing:.1em}
-  .undecided{width:100%;margin-top:12px;border:1px dashed var(--tea);background:var(--card);border-radius:12px;padding:12px;color:var(--ink);font-size:14px;cursor:pointer;font-family:inherit;letter-spacing:.04em}
+  .slot{border:1px solid transparent;background:var(--fill);border-radius:16px;padding:12px 6px 10px;text-align:center;cursor:pointer;font-family:var(--en);font-size:19px;font-weight:500;color:var(--ink);letter-spacing:.04em;transition:all .18s;line-height:1.2}
+  .slot small{display:block;font-family:"Noto Sans TC",sans-serif;font-size:10.5px;color:var(--muted);font-weight:300;margin-top:3px;letter-spacing:.1em}
+  .slot:hover{border-color:var(--line)}
+  .slot.on{background:var(--deep);color:#fff;box-shadow:0 4px 12px rgba(140,112,95,.25)}
+  .slot.on small{color:#f0e4d9}
+  .slot.full{background:var(--full);color:#cbbfb5;cursor:not-allowed}
+  .slot.full small{color:#cbbfb5}
+  .undecided{width:100%;margin-top:12px;border:1px dashed var(--tea);background:transparent;border-radius:16px;padding:12px;color:var(--deep);font-size:13.5px;cursor:pointer;font-family:inherit;letter-spacing:.06em;transition:all .18s}
   .undecided.on{background:var(--deep);border:1px solid var(--deep);color:#fff}
-  .linetop{display:inline-block;margin-top:16px;padding:10px 24px;border-radius:999px;background:#06C755;color:#fff;font-size:14px;font-weight:500;text-decoration:none;letter-spacing:.1em;box-shadow:0 2px 10px rgba(6,199,85,.2)}
+
+  /* 表單 */
+  label{display:block;font-size:13px;margin:18px 0 7px;color:var(--ink);letter-spacing:.08em}
+  label .req{color:var(--tea)}
+  input,select,textarea{width:100%;font-size:16px;padding:13px 16px;border:1px solid transparent;border-radius:14px;background:var(--fill);color:var(--ink);font-family:inherit;outline:none;transition:border-color .18s,background .18s,box-shadow .18s;-webkit-appearance:none;appearance:none}
+  input::placeholder,textarea::placeholder{color:#c2b4aa;font-weight:300}
+  select{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 22px) 52%,calc(100% - 17px) 52%;background-size:5px 5px;background-repeat:no-repeat;padding-right:40px}
+  input:focus,select:focus,textarea:focus{border-color:var(--tea);background:#fff;box-shadow:0 0 0 4px rgba(203,179,156,.18)}
+  textarea{min-height:84px;resize:vertical}
+  .radios{display:flex;flex-wrap:wrap;gap:8px}
+  .agree{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--muted);margin-top:20px;font-weight:300;line-height:1.7}
+  .agree input{width:16px;height:16px;margin-top:3px;flex:0 0 auto;-webkit-appearance:checkbox;appearance:checkbox;accent-color:var(--deep);padding:0}
+  button.submit{width:100%;margin-top:22px;background:linear-gradient(135deg,#9a7d6b,#7f6353);color:#fff;border:0;border-radius:999px;padding:16px;font-size:15.5px;cursor:pointer;font-family:inherit;letter-spacing:.24em;font-weight:500;box-shadow:0 8px 20px rgba(127,99,83,.25);transition:transform .15s,box-shadow .15s}
+  button.submit:active{transform:translateY(1px);box-shadow:0 4px 12px rgba(127,99,83,.25)}
+  button.submit:disabled{opacity:.55;cursor:not-allowed}
+  button.back{width:100%;margin-top:10px;background:none;border:0;color:var(--muted);font-size:13.5px;padding:8px;cursor:pointer;font-family:inherit;letter-spacing:.12em}
+  .err{color:#b0665a;font-size:13px;margin-top:10px;min-height:1em;text-align:center}
+  .muted{color:var(--muted);font-size:12px;font-weight:300}
+  .empty{color:var(--muted);font-size:14px;padding:8px 0}
+
+  /* 成功畫面：票券感 */
+  .done{text-align:center;padding:34px 22px 28px;position:relative}
+  .done .mark{width:76px;margin:0 auto 4px;display:block}
+  .done .big{font-family:var(--serif);font-size:20px;color:var(--cocoa);margin:8px 0 18px;letter-spacing:.16em;font-weight:500}
+  .done table{margin:0 auto;text-align:left;font-size:14px;border-collapse:collapse}
+  .done td{padding:6px 12px}
+  .done td:first-child{color:var(--muted);font-weight:300;letter-spacing:.1em}
+  .bid{margin:22px auto 0;padding:14px 20px;border-top:1px dashed var(--tea);border-bottom:1px dashed var(--tea);display:inline-block;min-width:220px}
+  .bid-l{font-family:var(--en);font-style:italic;font-size:14px;color:var(--muted);letter-spacing:.16em}
+  .bid-v{font-family:var(--en);font-size:28px;color:var(--cocoa);letter-spacing:.08em;font-weight:500;line-height:1.3}
+  .linebtn{display:inline-block;margin-top:8px;padding:11px 24px;border-radius:999px;background:#06C755;color:#fff;text-decoration:none;font-size:14px;letter-spacing:.1em;font-weight:500}
+
+  /* 頁尾 */
+  footer{text-align:center;margin-top:28px;color:var(--muted);font-size:12px;font-weight:300;letter-spacing:.08em}
+  footer #addr::before{content:"ADDRESS";display:block;font-family:var(--en);font-style:italic;font-size:13px;letter-spacing:.2em;color:var(--tea);margin-bottom:2px}
+  .linetop{display:inline-block;margin-top:16px;padding:11px 26px;border-radius:999px;background:#06C755;color:#fff;font-size:14px;font-weight:500;text-decoration:none;letter-spacing:.12em;box-shadow:0 6px 16px rgba(6,199,85,.22)}
   .linetop:active{opacity:.85}
-  .linelink{display:inline-block;margin-top:10px;padding:8px 18px;border:1px solid var(--tea);border-radius:999px;color:var(--deep);font-size:12.5px;text-decoration:none;letter-spacing:.06em;background:var(--card)}
-  .linebtn{display:inline-block;margin-top:6px;padding:10px 22px;border-radius:999px;border:1px solid var(--deep);color:var(--deep);text-decoration:none;font-size:14px;letter-spacing:.1em}
-  footer{text-align:center;margin-top:24px;color:var(--muted);font-size:12px;font-weight:300;letter-spacing:.06em}
+  .copy{margin-top:22px;font-family:var(--en);font-size:12px;letter-spacing:.24em;color:#c7b8ad}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <img id="logo" class="logo" alt="Original Pilates">
-    <div class="brand" id="brand">ORIGINAL PILATES</div>
-    <h1 id="title">Original Pilates 初形｜體驗課預約</h1>
-    <div class="divider"></div>
-    <p class="intro" id="intro"></p>
+    <div class="arch">
+      <img id="logo" class="logo" alt="Original Pilates">
+      <div class="brand" id="brand">ORIGINAL PILATES</div>
+      <h1 id="title"><small>Original Pilates 初形</small>體驗課預約</h1>
+      <div class="divider"></div>
+      <p class="intro" id="intro"></p>
+    </div>
   </header>
 
   <div id="loading" class="card muted">讀取可預約時段中…</div>
 
   <form id="form" style="display:none" onsubmit="return false">
-    <div class="prog"><span id="pg1" class="on">1　基本資料</span><span class="bar"></span><span id="pg2">2　預約時段與需求</span></div>
+    <div class="prog"><span id="pg1" class="on"><i>1</i>基本資料</span><span class="bar"></span><span id="pg2"><i>2</i>時段與需求</span></div>
 
     <!-- 第一頁 -->
     <div id="page1">
       <div class="card">
-        <div class="step"><b>1</b>基本資料</div>
+        <div class="step"><em>01</em>基本資料<span>Profile</span></div>
         <div class="why">以下資料是為了讓老師在上課前先了解你的背景與身體狀況，體驗課就能依照你的需求客製安排，給你更貼近自己的體驗。</div>
         <label>姓名 <span class="req">*</span></label>
         <input id="name" maxlength="30" autocomplete="name">
         <label>手機 <span class="req">*</span></label>
         <input id="phone" type="tel" inputmode="tel" maxlength="20" placeholder="09xxxxxxxx" autocomplete="tel">
         <label>生日 <span class="req">*</span></label>
-        <input id="birthday" inputmode="numeric" maxlength="10" placeholder="例：1990/05/20（民國 79/05/20 也可以）" autocomplete="bday">
+        <input id="birthday" inputmode="numeric" maxlength="10" placeholder="例：1990/05/20（可填民國年）" autocomplete="bday">
         <label>職業 <span class="req">*</span></label>
         <input id="job" maxlength="40" placeholder="例：上班族（久坐）、護理師、老師" autocomplete="organization-title">
         <button class="submit" id="btn1" type="button" onclick="next1()">下一頁</button>
@@ -111,7 +148,7 @@
     <!-- 第二頁 -->
     <div id="page2" style="display:none">
       <div class="card">
-        <div class="step"><b>2</b>選擇日期與時段</div>
+        <div class="step"><em>02</em>選擇日期與時段<span>Schedule</span></div>
         <div class="dwrap"><button type="button" class="arr" id="prev" aria-label="往前">‹</button><div class="dates" id="dates"></div><button type="button" class="arr" id="next" aria-label="往後">›</button></div>
         <div class="times" id="times" style="margin-top:14px"></div>
         <div class="muted" style="margin-top:8px">每個時段名額有限，額滿就無法再選。</div>
@@ -119,7 +156,7 @@
       </div>
 
       <div class="card">
-        <div class="step"><b>3</b>體驗需求</div>
+        <div class="step"><em>03</em>體驗需求<span>About You</span></div>
         <label>是否有器械皮拉提斯經驗 <span class="req">*</span></label>
         <div class="radios" id="exp"></div>
         <label>預約體驗課項目 <span class="req">*</span></label>
@@ -152,7 +189,7 @@
 
   <div id="done" class="card done" style="display:none"></div>
 
-  <footer><div id="addr"></div><a id="lineLink" class="linetop" target="_blank" rel="noopener" style="display:none">加入官方 LINE 詢問</a></footer>
+  <footer><div id="addr"></div><a id="lineLink" class="linetop" target="_blank" rel="noopener" style="display:none">加入官方 LINE 詢問</a><div class="copy">ORIGINAL PILATES</div></footer>
 </div>
 
 <script>
