@@ -68,6 +68,8 @@
   button.back{width:100%;margin-top:10px;background:none;border:0;color:var(--muted);font-size:14px;padding:8px;cursor:pointer;font-family:inherit;letter-spacing:.1em}
   .undecided{width:100%;margin-top:12px;border:1px dashed var(--tea);background:var(--card);border-radius:12px;padding:12px;color:var(--ink);font-size:14px;cursor:pointer;font-family:inherit;letter-spacing:.04em}
   .undecided.on{background:var(--deep);border:1px solid var(--deep);color:#fff}
+  .linetop{display:inline-block;margin-top:16px;padding:10px 24px;border-radius:999px;background:#06C755;color:#fff;font-size:14px;font-weight:500;text-decoration:none;letter-spacing:.1em;box-shadow:0 2px 10px rgba(6,199,85,.2)}
+  .linetop:active{opacity:.85}
   .linelink{display:inline-block;margin-top:10px;padding:8px 18px;border:1px solid var(--tea);border-radius:999px;color:var(--deep);font-size:12.5px;text-decoration:none;letter-spacing:.06em;background:var(--card)}
   .linebtn{display:inline-block;margin-top:6px;padding:10px 22px;border-radius:999px;border:1px solid var(--deep);color:var(--deep);text-decoration:none;font-size:14px;letter-spacing:.1em}
   footer{text-align:center;margin-top:28px;color:var(--muted);font-size:12px;font-weight:300;letter-spacing:.06em}
@@ -81,6 +83,7 @@
     <h1 id="title">Original Pilates 初形｜體驗課預約</h1>
     <div class="divider"></div>
     <p class="intro" id="intro"></p>
+    <a id="lineTop" class="linetop" target="_blank" rel="noopener" style="display:none">加入官方 LINE 詢問</a>
   </header>
 
   <div id="loading" class="card muted">讀取可預約時段中…</div>
@@ -218,7 +221,7 @@ function load(){
     data = d;
     el('intro').textContent = d.intro || '';
     el('addr').textContent = d.address || '';
-    if (/^https:\/\//.test(d.lineUrl || '')) { el('lineLink').href = d.lineUrl; el('lineLink').style.display = ''; }
+    if (/^https:\/\//.test(d.lineUrl || '')) { el('lineLink').href = d.lineUrl; el('lineLink').style.display = ''; el('lineTop').href = d.lineUrl; el('lineTop').style.display = ''; }
     loadLogo(d.logo);
     el('course').innerHTML = '<option value="">請選擇</option>' + d.courses.map(function(c){ return '<option>' + esc(c) + '</option>'; }).join('');
     el('exp').innerHTML = EXP.map(function(x){ return '<button type="button" class="chip" data-v="' + esc(x) + '">' + esc(x) + '</button>'; }).join('');
