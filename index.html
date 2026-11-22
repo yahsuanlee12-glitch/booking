@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Original Pilates 初形｜體驗課預約</title>
+<meta name="description" content="Original Pilates 初形 皮拉提斯體驗課線上預約">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f6f1eb;--card:#fffdfa;--ink:#5a4a40;--muted:#a69689;--tea:#c4ab95;--deep:#8f7564;--line:#ebe1d6;--soft:#f1e8de;--full:#f3eee8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;font-weight:400;line-height:1.7;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:520px;margin:0 auto;padding:36px 20px 56px}
+  header{text-align:center;margin-bottom:26px}
+  .logo{display:none;width:128px;height:auto;margin:0 auto 14px}
+  .logo.show{display:block}
+  .brand{letter-spacing:.32em;font-size:12px;color:var(--deep);font-weight:500;margin-bottom:6px}
+  h1{font-size:19px;font-weight:500;margin:4px 0 10px;color:var(--ink);letter-spacing:.08em}
+  .divider{width:28px;height:1px;background:var(--tea);margin:0 auto 12px}
+  .intro{color:var(--muted);font-size:13.5px;margin:0;font-weight:300}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 20px;margin-top:16px;box-shadow:0 2px 14px rgba(143,117,100,.05)}
+  .step{font-size:12.5px;color:var(--deep);font-weight:500;letter-spacing:.14em;margin-bottom:12px}
+  .step b{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;border-radius:50%;background:var(--soft);color:var(--deep);font-size:11px;font-weight:500;margin-right:8px;letter-spacing:0}
+  .dwrap{display:flex;align-items:flex-start;gap:6px}
+  .arr{flex:0 0 auto;width:32px;height:38px;border:1px solid var(--line);background:var(--card);border-radius:50%;color:var(--deep);font-size:18px;line-height:1;cursor:pointer;font-family:inherit;padding:0}
+  .arr:active{background:var(--soft)}
+  .dates{flex:1;min-width:0;display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--tea) var(--soft)}
+  .dates::-webkit-scrollbar{height:6px}
+  .dates::-webkit-scrollbar-track{background:var(--soft);border-radius:999px}
+  .dates::-webkit-scrollbar-thumb{background:var(--tea);border-radius:999px}
+  .chip{flex:0 0 auto;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 16px;font-size:13.5px;cursor:pointer;color:var(--ink);font-family:inherit;letter-spacing:.04em;transition:all .15s}
+  .chip.on{background:var(--deep);border-color:var(--deep);color:#fff}
+  .times{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
+  .slot{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:11px 6px;text-align:center;cursor:pointer;font-size:15px;color:var(--ink);font-family:inherit;letter-spacing:.04em;transition:all .15s}
+  .slot small{display:block;font-size:11px;color:var(--muted);font-weight:300}
+  .slot.on{background:var(--deep);border-color:var(--deep);color:#fff}
+  .slot.on small{color:#efe3d8}
+  .slot.full{background:var(--full);border-color:var(--full);color:#c9bdb2;cursor:not-allowed}
+  .slot.full small{color:#c9bdb2}
+  label{display:block;font-size:13.5px;margin:16px 0 6px;color:var(--ink)}
+  label .req{color:var(--deep)}
+  input,select,textarea{width:100%;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-family:inherit;outline:none;transition:border-color .15s;-webkit-appearance:none;appearance:none}
+  select{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:36px}
+  input:focus,select:focus,textarea:focus{border-color:var(--tea)}
+  textarea{min-height:76px;resize:vertical}
+  .radios{display:flex;flex-wrap:wrap;gap:8px}
+  .agree{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--muted);margin-top:18px;font-weight:300}
+  .agree input{width:16px;height:16px;margin-top:3px;flex:0 0 auto;-webkit-appearance:checkbox;appearance:checkbox;accent-color:var(--deep)}
+  button.submit{width:100%;margin-top:20px;background:var(--deep);color:#fff;border:0;border-radius:999px;padding:15px;font-size:16px;cursor:pointer;font-family:inherit;letter-spacing:.2em;font-weight:500}
+  button.submit:disabled{opacity:.5;cursor:not-allowed}
+  .err{color:#b0574b;font-size:13.5px;margin-top:10px;min-height:1em;text-align:center}
+  .muted{color:var(--muted);font-size:12.5px;font-weight:300}
+  .why{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:12.5px;color:var(--deep);font-weight:300;line-height:1.75;margin-bottom:4px}
+  .empty{color:var(--muted);font-size:14px;padding:8px 0}
+  .done{text-align:center;padding:30px 20px}
+  .done .mark{width:84px;margin:0 auto 6px;display:block}
+  .done .big{font-size:18px;color:var(--ink);margin:6px 0 16px;letter-spacing:.12em;font-weight:500}
+  .done table{margin:0 auto;text-align:left;font-size:14.5px;border-collapse:collapse}
+  .done td{padding:5px 12px}
+  .done td:first-child{color:var(--muted);font-weight:300}
+  .bid{margin:18px auto 0;padding:12px 16px;border:1px dashed var(--tea);border-radius:14px;display:inline-block;min-width:200px}
+  .bid-l{font-size:12px;color:var(--muted);letter-spacing:.14em;font-weight:300}
+  .bid-v{font-size:22px;color:var(--deep);letter-spacing:.08em;font-weight:500}
+  .prog{display:flex;align-items:center;gap:10px;justify-content:center;font-size:12.5px;color:var(--muted);letter-spacing:.08em;margin:4px 0 2px}
+  .prog span.on{color:var(--deep);font-weight:500}
+  .prog .bar{width:28px;height:1px;background:var(--tea)}
+  button.back{width:100%;margin-top:10px;background:none;border:0;color:var(--muted);font-size:14px;padding:8px;cursor:pointer;font-family:inherit;letter-spacing:.1em}
+  .undecided{width:100%;margin-top:12px;border:1px dashed var(--tea);background:var(--card);border-radius:12px;padding:12px;color:var(--ink);font-size:14px;cursor:pointer;font-family:inherit;letter-spacing:.04em}
+  .undecided.on{background:var(--deep);border:1px solid var(--deep);color:#fff}
+  .linebtn{display:inline-block;margin-top:6px;padding:10px 22px;border-radius:999px;border:1px solid var(--deep);color:var(--deep);text-decoration:none;font-size:14px;letter-spacing:.1em}
+  footer{text-align:center;margin-top:28px;color:var(--muted);font-size:12px;font-weight:300;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img id="logo" class="logo" alt="Original Pilates">
+    <div class="brand" id="brand">ORIGINAL PILATES</div>
+    <h1 id="title">Original Pilates 初形｜體驗課預約</h1>
+    <div class="divider"></div>
+    <p class="intro" id="intro"></p>
+  </header>
+
+  <div id="loading" class="card muted">讀取可預約時段中…</div>
+
+  <form id="form" style="display:none" onsubmit="return false">
+    <div class="prog"><span id="pg1" class="on">1　基本資料</span><span class="bar"></span><span id="pg2">2　預約時段與需求</span></div>
+
+    <!-- 第一頁 -->
+    <div id="page1">
+      <div class="card">
+        <div class="step"><b>1</b>基本資料</div>
+        <div class="why">以下資料是為了讓老師在上課前先了解你的背景與身體狀況，體驗課就能依照你的需求客製安排，給你更貼近自己的體驗。</div>
+        <label>姓名 <span class="req">*</span></label>
+        <input id="name" maxlength="30" autocomplete="name">
+        <label>手機 <span class="req">*</span></label>
+        <input id="phone" type="tel" inputmode="tel" maxlength="20" placeholder="09xxxxxxxx" autocomplete="tel">
+        <label>生日 <span class="req">*</span></label>
+        <input id="birthday" inputmode="numeric" maxlength="10" placeholder="例：1990/05/20（民國 79/05/20 也可以）" autocomplete="bday">
+        <label>職業 <span class="req">*</span></label>
+        <input id="job" maxlength="40" placeholder="例：上班族（久坐）、護理師、老師" autocomplete="organization-title">
+        <button class="submit" id="btn1" type="button" onclick="next1()">下一頁</button>
+        <div class="err" id="err1"></div>
+      </div>
+    </div>
+
+    <!-- 第二頁 -->
+    <div id="page2" style="display:none">
+      <div class="card">
+        <div class="step"><b>2</b>選擇日期與時段</div>
+        <div class="dwrap"><button type="button" class="arr" id="prev" aria-label="往前">‹</button><div class="dates" id="dates"></div><button type="button" class="arr" id="next" aria-label="往後">›</button></div>
+        <div class="times" id="times" style="margin-top:14px"></div>
+        <div class="muted" style="margin-top:8px">每個時段名額有限，額滿就無法再選。</div>
+        <button type="button" class="undecided" id="undecided">時間還不確定，之後透過官方 LINE 約</button>
+      </div>
+
+      <div class="card">
+        <div class="step"><b>3</b>體驗需求</div>
+        <label>是否有器械皮拉提斯經驗 <span class="req">*</span></label>
+        <div class="radios" id="exp"></div>
+        <label>預約體驗課項目 <span class="req">*</span></label>
+        <select id="course"></select>
+        <label>想改善的部位或是訓練目標</label>
+        <textarea id="goal" maxlength="300" placeholder="例：肩頸僵硬、骨盆前傾、產後核心、想改善體態"></textarea>
+        <label>身體是否有特別需要老師注意的地方</label>
+        <textarea id="note" maxlength="300" placeholder="例：舊傷、開過刀、椎間盤突出、懷孕中；沒有可以填「無」"></textarea>
+        <label>從哪裡知道我們</label>
+        <select id="source">
+          <option value="">請選擇</option>
+          <option>Instagram 廣告</option>
+          <option>Facebook 廣告</option>
+          <option>Instagram 貼文／帳號</option>
+          <option>Google 搜尋／地圖</option>
+          <option>朋友介紹</option>
+          <option>經過店門口</option>
+          <option>其他</option>
+        </select>
+        <div class="agree">
+          <input type="checkbox" id="agree">
+          <span>我同意 Original Pilates 使用以上資料聯絡我、安排體驗課程，資料不會提供給第三方。</span>
+        </div>
+        <button class="submit" id="btn" type="button" onclick="send()">送出預約</button>
+        <button class="back" type="button" onclick="showPage(1)">回上一頁</button>
+        <div class="err" id="err"></div>
+      </div>
+    </div>
+  </form>
+
+  <div id="done" class="card done" style="display:none"></div>
+
+  <footer id="addr"></footer>
+</div>
+
+<script>
+var API = 'https://script.google.com/macros/s/AKfycbzd5s8kS7SXlSFzTFS4Zr871PCic_p3wQnj9UbbIkZJyDCkXIIAvQxlzvJW6KdcoH5r/exec';
+/* 在 Apps Script 頁面內用 google.script.run；在外部網站（GitHub Pages）用 fetch，且不帶 Google 登入資訊，避免多帳號問題 */
+var GAS = (typeof google !== 'undefined' && google.script && google.script.run);
+function call(action, body, ok, fail){
+  var err = function(e){ fail(new Error((e && e.message) ? e.message.replace(/^Error:\s*/, '') : '網路連線不穩，請再試一次')); };
+  if (GAS) {
+    var r = google.script.run.withSuccessHandler(ok).withFailureHandler(err);
+    if (action === 'availability') r.getAvailability(); else if (action === 'step1') r.saveStep1(body); else r.submitBooking(body);
+    return;
+  }
+  var req = action === 'availability'
+    ? fetch(API + '?action=availability', { credentials: 'omit' })
+    : fetch(API, { method: 'POST', credentials: 'omit', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: action, form: body }) });
+  req.then(function(r){ return r.json(); })
+    .then(function(j){ j.ok ? ok(j.data) : err(new Error(j.error)); })
+    .catch(function(){ err(null); });
+}
+
+var data = null, selDate = null, selTime = null, selExp = '', lead = null, undecided = false;
+var EXP = ['沒有', '有，練過幾次', '有，固定在練'];
+
+function el(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+var logoData = '';
+/* 載入 logo：把白字黑底轉成奶茶可可色、透明背景，並裁掉多餘留白 */
+function loadLogo(url){
+  if (!url) return;
+  var img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = function(){
+    try {
+      var W = img.naturalWidth, H = img.naturalHeight;
+      var c = document.createElement('canvas'); c.width = W; c.height = H;
+      var x = c.getContext('2d'); x.drawImage(img, 0, 0);
+      var id = x.getImageData(0, 0, W, H), p = id.data;
+      var minX = W, minY = H, maxX = 0, maxY = 0;
+      for (var i = 0; i < p.length; i += 4) {
+        var lum = (p[i] + p[i+1] + p[i+2]) / 3;
+        var a = Math.max(0, Math.min(1, (lum - 60) / 170));
+        p[i] = 143; p[i+1] = 117; p[i+2] = 100; p[i+3] = Math.round(a * 255);
+        if (a > 0.15) { var k = i / 4, px = k % W, py = (k - px) / W;
+          if (px < minX) minX = px; if (px > maxX) maxX = px; if (py < minY) minY = py; if (py > maxY) maxY = py; }
+      }
+      x.putImageData(id, 0, 0);
+      if (maxX <= minX) return;
+      var pad = Math.round(W * 0.02);
+      minX = Math.max(0, minX - pad); minY = Math.max(0, minY - pad);
+      maxX = Math.min(W - 1, maxX + pad); maxY = Math.min(H - 1, maxY + pad);
+      var o = document.createElement('canvas'); o.width = maxX - minX + 1; o.height = maxY - minY + 1;
+      o.getContext('2d').drawImage(c, minX, minY, o.width, o.height, 0, 0, o.width, o.height);
+      logoData = o.toDataURL('image/png');
+      el('logo').src = logoData; el('logo').classList.add('show');
+      el('brand').style.display = 'none';
+    } catch (e) {}
+  };
+  img.src = url;
+}
+
+function load(){
+  call('availability', null, function(d){
+    data = d;
+    el('intro').textContent = d.intro || '';
+    el('addr').textContent = d.address || '';
+    loadLogo(d.logo);
+    el('course').innerHTML = '<option value="">請選擇</option>' + d.courses.map(function(c){ return '<option>' + esc(c) + '</option>'; }).join('');
+    el('exp').innerHTML = EXP.map(function(x){ return '<button type="button" class="chip" data-v="' + esc(x) + '">' + esc(x) + '</button>'; }).join('');
+    Array.prototype.forEach.call(el('exp').children, function(b){
+      b.onclick = function(){ selExp = b.dataset.v; Array.prototype.forEach.call(el('exp').children, function(x){ x.classList.toggle('on', x === b); }); };
+    });
+    renderDates();
+    el('loading').style.display = 'none';
+    el('form').style.display = '';
+  }, function(e){
+    el('loading').textContent = '讀取失敗，請稍後再試或直接私訊我們。';
+  });
+}
+
+function renderDates(){
+  var days = data.days;
+  if (!days.length){ el('dates').innerHTML = '<div class="empty">目前沒有可預約的日期，請私訊我們安排。</div>'; el('times').innerHTML=''; return; }
+  if (!selDate || !days.some(function(d){ return d.date === selDate; })) {
+    var firstOpen = days.filter(function(d){ return d.slots.some(function(s){ return !s.full; }); })[0] || days[0];
+    selDate = firstOpen.date;
+  }
+  var keep = el('dates').scrollLeft;
+  el('dates').innerHTML = days.map(function(d){
+    return '<button type="button" class="chip' + (d.date === selDate ? ' on' : '') + '" data-d="' + d.date + '">' + esc(d.label) + '</button>';
+  }).join('');
+  Array.prototype.forEach.call(el('dates').children, function(b){
+    b.onclick = function(){ selDate = b.dataset.d; selTime = null; renderDates(); };
+  });
+  var box = el('dates'); box.scrollLeft = keep;
+  var on = box.querySelector('.on');
+  if (on) { var l = on.offsetLeft - box.offsetLeft; if (l < box.scrollLeft || l + on.offsetWidth > box.scrollLeft + box.clientWidth) box.scrollLeft = l - 8; }
+  renderTimes();
+}
+
+function renderTimes(){
+  var day = data.days.filter(function(d){ return d.date === selDate; })[0];
+  if (!day){ el('times').innerHTML = ''; return; }
+  el('times').innerHTML = day.slots.map(function(s){
+    var full = s.full;
+    var cls = 'slot' + (full ? ' full' : '') + (s.time === selTime ? ' on' : '');
+    return '<button type="button" class="' + cls + '" data-t="' + s.time + '"' + (full ? ' disabled' : '') + '>' +
+      s.time + '<small>' + (full ? '已額滿' : '可預約') + '</small></button>';
+  }).join('');
+  Array.prototype.forEach.call(el('times').children, function(b){
+    if (b.disabled) return;
+    b.onclick = function(){ selTime = b.dataset.t; undecided = false; renderTimes(); };
+  });
+  el('undecided').classList.toggle('on', undecided);
+}
+
+/* 生日轉成 yyyy-mm-dd；接受 1990/5/20、1990-05-20、19900520、民國 79/5/20 */
+function normBirthday(v){
+  v = String(v || '').trim().replace(/[年月.\-\s]/g, '/').replace(/日/g, '').replace(/\/+/g, '/').replace(/\/$/, '');
+  var m = v.match(/^(\d{2,4})\/(\d{1,2})\/(\d{1,2})$/) || v.match(/^(\d{4})(\d{2})(\d{2})$/);
+  if (!m) return '';
+  var y = Number(m[1]), mo = Number(m[2]), d = Number(m[3]);
+  if (y < 200) y += 1911;
+  var dt = new Date(y, mo - 1, d);
+  if (dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== d) return '';
+  if (y < 1920 || dt > new Date()) return '';
+  return y + '-' + ('0' + mo).slice(-2) + '-' + ('0' + d).slice(-2);
+}
+
+function showPage(n){
+  el('page1').style.display = n === 1 ? '' : 'none';
+  el('page2').style.display = n === 2 ? '' : 'none';
+  el('pg1').classList.toggle('on', n === 1); el('pg2').classList.toggle('on', n === 2);
+  window.scrollTo(0, 0);
+  if (n === 2) renderDates();
+}
+
+/* 第一頁：按「下一頁」就先存到後台 */
+function next1(){
+  el('err1').textContent = '';
+  var f = { name: el('name').value, phone: el('phone').value, birthday: normBirthday(el('birthday').value), job: el('job').value };
+  if (!f.name.trim() || !f.phone.trim()) { el('err1').textContent = '請填寫姓名和手機'; return; }
+  if (!/^09\d{8}$/.test(f.phone.replace(/[\s-]/g, '')) && !/^\+?\d{8,15}$/.test(f.phone.replace(/[\s-]/g, ''))) { el('err1').textContent = '手機號碼格式不正確'; return; }
+  if (!f.birthday) { el('err1').textContent = '生日格式請填像 1990/05/20'; return; }
+  if (!f.job.trim()) { el('err1').textContent = '請填寫職業'; return; }
+  if (lead) { f.id = lead.id; f.token = lead.token; }
+  el('btn1').disabled = true; el('btn1').textContent = '儲存中…';
+  call('step1', f, function(r){
+    lead = r;
+    el('btn1').disabled = false; el('btn1').textContent = '下一頁';
+    showPage(2);
+  }, function(e){
+    el('btn1').disabled = false; el('btn1').textContent = '下一頁';
+    el('err1').textContent = e.message;
+  });
+}
+
+function send(){
+  el('err').textContent = '';
+  if (!undecided && (!selDate || !selTime)) { el('err').textContent = '請選擇日期和時段，或選「時間還不確定」'; return; }
+  var f = {
+    date: undecided ? '' : selDate, time: undecided ? '' : selTime, undecided: undecided,
+    name: el('name').value, phone: el('phone').value,
+    birthday: normBirthday(el('birthday').value), job: el('job').value,
+    course: el('course').value, experience: selExp, source: el('source').value,
+    goal: el('goal').value, note: el('note').value, agree: el('agree').checked
+  };
+  if (lead) { f.id = lead.id; f.token = lead.token; }
+  if (!f.experience) { el('err').textContent = '請選擇是否有器械皮拉提斯經驗'; return; }
+  if (!f.course) { el('err').textContent = '請選擇預約體驗課項目'; return; }
+  if (!f.agree) { el('err').textContent = '請勾選同意個人資料使用說明'; return; }
+  el('btn').disabled = true; el('btn').textContent = '送出中…';
+  call('submit', f, function(r){
+    el('form').style.display = 'none';
+    el('done').style.display = '';
+    el('done').innerHTML =
+      (logoData ? '<img class="mark" src="' + logoData + '" alt="">' : '') + '<div class="big">預約成功</div>' +
+      '<table><tr><td>姓名</td><td>' + esc(r.name) + '</td></tr>' +
+      (r.undecided ? '<tr><td>時間</td><td>之後透過官方 LINE 約</td></tr>' :
+        '<tr><td>日期</td><td>' + esc(r.label) + '</td></tr><tr><td>時段</td><td>' + esc(r.time) + '</td></tr>') +
+      '<tr><td>地點</td><td>' + esc(r.address || '') + '</td></tr>' +
+      '</table>' +
+      '<div class="bid"><div class="bid-l">預約編號</div><div class="bid-v">' + esc(r.id) + '</div></div>' +
+      '<p class="muted" style="margin-top:14px">請截圖保存預約編號。<br>' + (r.undecided ? '請加入官方 LINE，提供預約編號和方便的時間，我們會幫你安排。' : '如需更改時間或有任何問題，都可以提供預約編號至官方 LINE 與我們聯繫。') + '</p>' +
+      (/^https:\/\//.test(data.lineUrl || '') ? '<a class="linebtn" href="' + esc(data.lineUrl) + '" target="_blank" rel="noopener">前往官方 LINE</a>' : '') +
+      '<p class="muted" style="margin-top:12px">我們會再聯絡你確認，記得穿方便活動的衣服、帶止滑襪。</p>';
+    window.scrollTo(0, 0);
+  }, function(e){
+    el('btn').disabled = false; el('btn').textContent = '送出預約';
+    el('err').textContent = e.message;
+    // 重新讀取名額
+    call('availability', null, function(d){ data = d; selTime = null; renderDates(); }, function(){});
+  });
+}
+
+el('undecided').onclick = function(){ undecided = !undecided; if (undecided) selTime = null; renderTimes(); };
+el('prev').onclick = function(){ el('dates').scrollBy({ left: -220, behavior: 'smooth' }); };
+el('next').onclick = function(){ el('dates').scrollBy({ left: 220, behavior: 'smooth' }); };
+load();
+</script>
+</body>
+</html>
